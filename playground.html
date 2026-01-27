@@ -6,5 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground — Complete Intro to Vue 3</title>
   </head>
-  <body></body>
+  <body>
+
+    <h1>Hello Frontend Masters!</h1>
+
+    <div id="app">
+
+      <h1> {{ displayTitle }} </h1>
+      <p :data-increment-by="incrementAmount">{{ count }}</p>
+      <button v-on:click="incrementCount">Increment Count</button>
+
+      <h1>{{ incrementAmount }}</h1>
+      <p>{{ optimizedIncrementAmount }}</p>
+
+      <div>
+        <label for="incrementAmount">Increment by: </label>
+        <input 
+          type="number" 
+          v-model="incrementAmount"
+        />
+      </div>
+
+      <hr />
+
+      <p v-if="message.length % 2 == 0">Even: {{ message.toUpperCase() }}</p>
+      <p v-else>Odd: {{ message }}</p>
+      <ul>
+        <li v-for="number in listOfNumbers">
+          {{ number * Math.random() }}
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue // alternative way to Vue.createApp
+      // Think of Vue as a big toolbox
+      // Inside that toolbox is a tool called createApp
+      // Take the tool named createApp out of the Vue toolbox so I can use it
+
+      const app = createApp({
+        // Create a new Vue application
+        // Inside the { ... } you tell Vue what your app should contain
+        data() {
+          // My app has a piece of data called message, and its value is 'Hello it works!'
+          return {
+            message: 'Hello it works',
+            listOfNumbers: [1, 2, 3, 4, 5],
+            count: 10,
+            incrementAmount: 8,
+            counterTitle: 'Counter Standard'
+          }
+        },
+        computed: {
+          displayTitle() {
+            if (this.count > 20) {
+              return 'Counter Standard - Very Long'
+            } else {
+              return 'Counter Standard'
+            }
+          },
+          optimizedIncrementAmount() {
+            return this.displayTitle.length * this.incrementAmount
+          }
+        },
+        methods: {
+          incrementCount() {
+            this.count += this.optimizedIncrementAmount;
+          }
+        },
+        watch: {
+          count(newValue) {
+            if (newValue > 20) {
+              this.counterTitle += ' Very Long'
+            }
+          }
+        }
+      })
+
+      app.mount('#app')
+      // Take my Vue app and attach it to the HTML element with id app.
+    </script>
+  </body>
 </html>
