@@ -7,8 +7,9 @@
     <title>Grey's Anatomy</title>
   </head>
   <body>
-    <h1>My Favourite TV show</h1>
     <div id="app">
+      <h1>My Favourite TV show</h1>
+
       <h2>Statistics</h2>
       <ul>
         <li v-for="(stat, type) in specialtyStatistics">{{ type }}: {{ stat }}</li>
@@ -51,57 +52,7 @@
   <script>
     const { createApp } = Vue
 
-    const app = createApp({
-      data: () => ({
-        favouritesList: [],
-        newCharacter: {
-          name: '',
-          specialty: []
-        },
-        listOfCharacters: [{
-          name: "Meredith",
-          specialty: ['General']
-        }, {
-          name: "Chistina",
-          specialty: ['Cardio']
-        }, {
-          name: "Alex",
-          specialty: ['Pediatric']
-        }, {
-          name: "Bailey",
-          specialty: ['General']
-        }]
-      }),
-      computed: {
-        specialtyStatistics() {
-          const specialties = ['Cardio', 'General', 'Pediatric']
-          const statistics = {
-            Cardio: 0,
-            General: 0,
-            Pediatric: 0
-          }
-
-          this.listOfCharacters.forEach(character => {
-            specialties.forEach(specialty => {
-              if (character.specialty.indexOf(specialty) > -1) {
-                statistics[specialty] += 1
-              }
-            })
-          })
-
-          return statistics
-        }
-      },
-      methods: {
-        favouriteCharacter(favourite) {
-          this.favouritesList.push(favourite)
-        },
-        addNewCharacter() {
-          this.listOfCharacters.push(this.newCharacter)
-          this.newCharacter = { name: '' }
-        }
-      }
-    })
+    const app = createApp()
 
     app.mount('#app')
   </script>
