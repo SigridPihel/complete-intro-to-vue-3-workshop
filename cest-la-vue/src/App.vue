@@ -12,6 +12,9 @@
       <router-link to="/user">User</router-link>
     </nav>
   </header>
+
+  <p>This is a new message for you!</p>
+
   <Suspense>
     <router-view />
 
